@@ -34,6 +34,6 @@ function countBs(string, letter) {
  return(`there are ${counter} ${letter}\'s`);
 }
 
-console.log(countBs('babadook','b'));
+
 
 })();
