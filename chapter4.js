@@ -79,20 +79,29 @@ var list = {
         }
     }
 };
-var testArray = [1,2,3,4,5];
-var obj = {};
-function objConstructor(array, obj, currentObj) {
 
+var testArray = [1, 2, 3, 4, 5];
+var obj = {};
+
+function objConstructor(array, obj, objArray=[]) {
     if (array.length === 0) {
-        console.log(obj);
-        return obj;
+        return objArray[0];
     }
-    if (! currentObj.hasOwnProperty('value')) {
-        currentObj.value = array.shift();
-        currentObj.rest = {};
-        return objConstructor(array, obj, obj.rest);
+    if (array.length ===1 ) {
+        obj.value = array.shift();
+        obj.rest = null;
+        objArray.push(obj);
+        return objConstructor(array, obj, objArray);
+
     }
+    if (!obj.hasOwnProperty('value')) {
+        obj.value = array.shift();
+        obj.rest = {};
+        objArray.push(obj);
+        return objConstructor(array, obj.rest, objArray);
+    }
+
 
 }
 
- console.log(objConstructor([1, 2, 3, 4, 5], {}));
+console.log(objConstructor([1, 2, 3, 4, 5], {}));
