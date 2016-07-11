@@ -69,25 +69,13 @@
 //     if()
 //
 // }
-var list = {
-    value: 1,
-    rest: {
-        value: 2,
-        rest: {
-            value: 3,
-            rest: null
-        }
-    }
-};
 
-var testArray = [1, 2, 3, 4, 5];
-var obj = {};
 
-function objConstructor(array, obj, objArray=[]) {
+function objConstructor(array, obj, objArray = []) {
     if (array.length === 0) {
         return objArray[0];
     }
-    if (array.length ===1 ) {
+    if (array.length === 1) {
         obj.value = array.shift();
         obj.rest = null;
         objArray.push(obj);
@@ -100,8 +88,31 @@ function objConstructor(array, obj, objArray=[]) {
         objArray.push(obj);
         return objConstructor(array, obj.rest, objArray);
     }
-
-
 }
 
-console.log(objConstructor([1, 2, 3, 4, 5], {}));
+var list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: {
+            value: 3,
+            next: null
+        }
+    }
+};
+
+function arrayConstructor(obj, array = []) {
+    array.push(obj.value);
+    if (obj.value === array[array.length-1]) {
+        console.log(value);
+
+    }
+
+    if (obj.next === null) {
+        console.log('we hit it folks' + obj);
+        return;
+    } else {
+        array.push(obj.value);
+    }
+}
+console.log(arrayConstructor(list));
