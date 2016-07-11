@@ -1,3 +1,5 @@
+
+
 // Write a range function that takes two arguments, start and end, and returns an array containing all the numbers from start up to (and including) end.
 //
 // Next, write a sum function that takes an array of numbers and returns the sum of these numbers. Run the previous program and see whether it does indeed return 55.
@@ -71,7 +73,7 @@
 // }
 
 
-function objConstructor(array, obj, objArray = []) {
+function objConstructor(array, obj={}, objArray = []) {
     if (array.length === 0) {
         return objArray[0];
     }
@@ -89,7 +91,7 @@ function objConstructor(array, obj, objArray = []) {
         return objConstructor(array, obj.rest, objArray);
     }
 }
-
+(function(){
 var list = {
     value: 1,
     next: {
@@ -101,18 +103,17 @@ var list = {
     }
 };
 
-function arrayConstructor(obj, array = []) {
-    array.push(obj.value);
-    if (obj.value === array[array.length-1]) {
-        console.log(value);
 
-    }
 
-    if (obj.next === null) {
-        console.log('we hit it folks' + obj);
-        return;
-    } else {
+function arrayConstructor(obj) {
+    var array = [];
+    while (obj) {
         array.push(obj.value);
+        obj = obj.next;
     }
+    return array;
 }
+
 console.log(arrayConstructor(list));
+
+})();
