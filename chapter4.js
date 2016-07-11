@@ -91,7 +91,7 @@ function objConstructor(array, obj={}, objArray = []) {
         return objConstructor(array, obj.rest, objArray);
     }
 }
-(function(){
+
 var list = {
     value: 1,
     next: {
@@ -103,8 +103,6 @@ var list = {
     }
 };
 
-
-
 function arrayConstructor(obj) {
     var array = [];
     while (obj) {
@@ -113,7 +111,26 @@ function arrayConstructor(obj) {
     }
     return array;
 }
+(function(){
 
-console.log(arrayConstructor(list));
+function prepend(obj, val) {
+    var newObj = {
+        value: val,
+        next: obj
+    };
+
+    return newObj;
+}
+
+function nth(obj,val) {
+    while(obj) {
+        if (obj.value === val)
+            return obj;
+    obj = obj.next;
+}
+    return undefined;
+}
+
+console.log(nth(list,10));
 
 })();
