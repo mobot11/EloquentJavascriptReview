@@ -103,14 +103,14 @@
 //     }
 // };
 //
-// function arrayConstructor(obj) {
-//     var array = [];
-//     while (obj) {
-//         array.push(obj.value);
-//         obj = obj.next;
-//     }
-//     return array;
-// }
+function arrayConstructor(obj) {
+    var array = [];
+    while (obj) {
+        array.push(obj.value);
+        obj = obj.next;
+    }
+    return array;
+}
 // function prepend(obj, val) {
 //     var newObj = {
 //         value: val,
@@ -128,42 +128,66 @@
 // }
 //     return undefined;
 // }
-(function(){
+(function() {
 
 
 
-// The == operator compares objects by identity. But sometimes, you would prefer to compare the values of their actual properties.
-//
-// Write a function, deepEqual, that takes two values and returns true only if they are the same value or are objects with the same properties whose values are also equal when compared with a recursive call to deepEqual.
-//
-// To find out whether to compare two things by identity (use the === operator for that) or by looking at their properties, you can use the typeof operator. If it produces "object" for both values, you should do a deep comparison. But you have to take one silly exception into account: by a historical accident, typeof null also produces "object".
 
-var value1 = {};
-var value2 = {};
 
-function deepEqual(val1, val2) {
-    var same = false;
-    if((typeof val1 && typeof val2 === 'object')) {
-        if(val1 !== null && val2 !== null) {
-        for (var key in value1) {
-            if(val1.hasOwnProperty(key) && val2.hasOwnProperty(key)) {
-                if(val1[key] === val2[key]) {
-                    same = true;
-                }
+    // The == operator compares objects by identity. But sometimes, you would prefer to compare the values of their actual properties.
+    //
+    // Write a function, deepEqual, that takes two values and returns true only if they are the same value or are objects with the same properties whose values are also equal when compared with a recursive call to deepEqual.
+    //
+    // To find out whether to compare two things by identity (use the === operator for that) or by looking at their properties, you can use the typeof operator. If it produces "object" for both values, you should do a deep comparison. But you have to take one silly exception into account: by a historical accident, typeof null also produces "object".
+
+    var value1 = {
+        test: true,
+        black: 'not'
+    };
+    var value2 = {
+        test: true,
+        black: 'not'
+    };
+
+    value3 = null;
+    value4 = null;
+
+    value5 = 'test';
+    value6 = 'test';
+
+    function deepEqual(val1, val2) {
+        if (val1 === null && val2 === null) {
+            return true;
+        }
+        if (val1 === val2) {
+            return true;
+        }
+        if (typeof val1 === 'object' && typeof val2 === 'object') {
+            return objectCompare(val1,val2);
+        }
+        return false;
+
+}
+
+function objectCompare(object1, object2) {
+    var weGravy;
+    for(var key in object1) {
+        if (object2.hasOwnProperty(key)) {
+            if (object2[key] === object1[key]) {
+                console.log(object2[key] + ' and ' + object1[key] +  '  are the same');
+                return true;
+            } else {
+                weGravy = false;
             }
+
         }
     }
-}
-    if (val1 === val2) {
-        same = true;
-    }
-    return same;
+    return weGravy;
 }
 
-var array = [];
-
-console.log(deepEqual(value1, value2));
-
+    console.log(deepEqual(value3, " "));
+    // console.log(deepEqual(value3, value4));
+    // console.log(deepEqual(value5, value6));
 
 
 })();
