@@ -155,36 +155,29 @@ function arrayConstructor(obj) {
     value5 = 'test';
     value6 = 'test';
 
-    function deepEqual(val1, val2) {
-        if (val1 === null && val2 === null) {
-            return true;
+    var deepEqual = function (x, y) {
+      if ((typeof x == "object" && x !== null) && (typeof y == "object" && y !== null)) {
+        if (Object.keys(x).length != Object.keys(y).length)
+          return false;
+
+        for (var prop in x) {
+          if (y.hasOwnProperty(prop))
+          {
+            if (! deepEqual(x[prop], y[prop]))
+              return false;
+          }
+          else
+            return false;
         }
-        if (val1 === val2) {
-            return true;
-        }
-        if (typeof val1 === 'object' && typeof val2 === 'object') {
-            return objectCompare(val1,val2);
-        }
+
+        return true;
+      }
+      else if (x !== y)
         return false;
-
-}
-
-function objectCompare(object1, object2) {
-    var weGravy;
-    for(var key in object1) {
-        if (object2.hasOwnProperty(key)) {
-            if (object2[key] === object1[key]) {
-                console.log(object2[key] + ' and ' + object1[key] +  '  are the same');
-                return true;
-            } else {
-                weGravy = false;
-            }
-
-        }
-    }
-    return weGravy;
-}
-
+      else
+        return true;
+    };
+    console.log(Object.keys(value1));
     console.log(deepEqual(value3, " "));
     // console.log(deepEqual(value3, value4));
     // console.log(deepEqual(value5, value6));
