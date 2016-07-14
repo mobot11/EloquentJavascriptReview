@@ -221,13 +221,39 @@ console.log(average(totalDifferences(byName)));
 // Compute and output the average age of the people in the ancestry data set per century. A person is assigned to a century by taking their year of death, dividing it by 100, and rounding it up, as in Math.ceil(person.died / 100).
 
 
+var centuries = {
+        16: [],
+        17: [],
+        18: [],
+        19: [],
+        20: [],
+        21: []
+};
+
+function assignAncestors(ancestors, centuries) {
+    for (var key in ancestors) {
+        var curr = ancestors[key];
+        var currCentury = Math.ceil(curr.died / 100);
+        centuries[currCentury].push(curr);
+    }
+    return averageAge(centuries);
+}
+
+function calculateAge(array) {
+    array.map(function(object) {
+        return object.died - object.born;
+    });
+    return average(array);
+}
+
+function averageAge(centuries) {
+    for (var key in centuries) {
+        return calculateAge(centuries[key]);
+    }
+}
 
 
-
-
-
-
-
+console.log(assignAncestors(byName, centuries));
 
 
 
