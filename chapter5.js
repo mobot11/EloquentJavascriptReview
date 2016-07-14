@@ -78,15 +78,141 @@ var ancestry = JSON.parse(ANCESTRY_FILE);
 //     return a + b;
 // }, 0));
 
-console.log(ancestry.reduce(function(min,cur) {
-    if (cur.born < min.born) {
-        return cur;
-    } else {
-        return min;
-    }
+// console.log(ancestry.reduce(function(min,cur) {
+//     if (cur.born < min.born) {
+//         return cur;
+//     } else {
+//         return min;
+//     }
+// }));
+
+//find average age for men and women in data set
+
+// function average(array) {
+//     //returns the sum of the array
+//     function plus(a,b) {
+//         return a + b;
+//     }
+//     //finds the average of the array
+//     return array.reduce(plus) / array.length;
+// }
+// //find age
+// function age(p) {
+//     return p.died - p.born;
+// }
+// //find sex is male
+// function male(p) {
+//     return p.sex == 'm';
+// }
+// //find sex is female
+// function female(p) {
+//     return p.sex == 'f';
+// }
+//
+// console.log(average(ancestry.filter(male).map(age)));
+// console.log(average(ancestry.filter(female).map(age)));
+
+
+
+// var byName = {};
+//
+// ancestry.forEach(function(person) {
+//     //make an object that sorts data by name
+//     byName[person.name] = person;
+// });
+//
+// console.log(byName['Philibert Haverbeke']);
+//
+// function reduceAncestors(person, f, defaultValue) {
+//     function valueFor(person) {
+//         if (person === null)
+//             return defaultValue;
+//         else
+//         return f(person, valueFor(byName[person.mother]),
+//                          valueFor(byName[person.father]));
+//     }
+//     return valueFor(person);
+// }
+//
+//
+// function sharedDNA(person, fromMother, fromFather) {
+//     if(person.name == 'Pauwels van Haverbeke')
+//         return 1;
+//     else
+//         return (fromMother + fromFather) / 2;
+// }
+//
+// var ph = byName['Philibert Haverbeke'];
+// console.log(reduceAncestors(ph, sharedDNA, 0) / 4);
+//
+//
+// var theSet = ["Carel Haverbeke", "Maria van Brussel",
+//               "Donald Duck"];
+//
+// function isInSet(set, person) {
+//     return set.indexOf(person.name) > 1;
+// }
+//
+// console.log(ancestry.filter(function(person) {
+//     return isInSet(theSet, person);
+// }));
+//
+//
+// console.log(ancestry.filter(isInSet.bind(null, thSet)));
+
+    //Chapter 5 excersizes!!!!
+
+//     Flattening
+//
+// Use the reduce method in combination with the concat method to “flatten” an array of arrays into a single array that has all the elements of the input arrays.
+
+var arrays = [[1, 2, 3], [4, 5], [6]];
+// Your code here.
+// → [1, 2, 3, 4, 5, 6]
+
+console.log(arrays.reduce(function(a,b) {
+    return a.concat(b);
 }));
 
 
+// Mother-child age difference
+//
+// Using the example data set from this chapter, compute the average age difference between mothers and children (the age of the mother when the child is born). You can use the average function defined earlier in this chapter.
+//
+// Note that not all the mothers mentioned in the data are themselves present in the array. The byName object, which makes it easy to find a person’s object from their name, might be useful here.
 
+function average(array) {
+  function plus(a, b) { return a + b; }
+  return array.reduce(plus) / array.length;
+}
+
+var byName = {};
+ancestry.forEach(function(person) {
+  byName[person.name] = person;
+});
+
+
+console.log(byName);
+
+function ageDifference(obj, person, mother) {
+    mother = obj[mother];
+    if (!mother) {
+        return 0;
+    } else {
+        return person.born - mother.born;
+    }
+
+}
+
+function totalDifferences(obj) {
+    var diffArray = [];
+    for (var key in obj) {
+        var curr = obj[key];
+        diffArray.push(ageDifference(obj, curr, curr.mother));
+    }
+    return diffArray;
+}
+
+console.log(totalDifferences(byName));
 
 } )();
