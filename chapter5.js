@@ -64,7 +64,7 @@ console.log(map(overNinety, function(person) {
     return person.name;
 }));
 
-
+console.log(ancestry);
 
 
 
