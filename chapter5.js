@@ -215,4 +215,6 @@ function totalDifferences(obj) {
 
 console.log(totalDifferences(byName));
 
+console.log('teset');
+
 } )();
