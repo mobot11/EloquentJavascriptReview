@@ -48,24 +48,34 @@ var ancestry = JSON.parse(ANCESTRY_FILE);
 
 
 
-function map(array, transform) {
-    var mapped = [];
+// function map(array, transform) {
+//     var mapped = [];
+//     for (var i = 0; i < array.length; i++) {
+//         mapped.push(transform(array[i]));
+//     }
+//     return mapped;
+// }
+//
+// var overNinety = ancestry.filter(function(person) {
+//     return person.died - person.born > 90;
+// });
+//
+// console.log(map(overNinety, function(person) {
+//     return person.name;
+// }));
+//
+// console.log(ancestry);
+
+function reduce(array,combine,start) {
+    var current = start;
     for (var i = 0; i < array.length; i++) {
-        mapped.push(transform(array[i]));
+        current = combine(current, array[i]);
     }
-    return mapped;
+    return current;
 }
 
-var overNinety = ancestry.filter(function(person) {
-    return person.died - person.born > 90;
-});
-
-console.log(map(overNinety, function(person) {
-    return person.name;
-}));
-
-console.log(ancestry);
-
-
+console.log(reduce([1, 2, 3, 4], function(a,b) {
+    return a + b;
+}, 0));
 
 } )();
