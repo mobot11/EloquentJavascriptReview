@@ -234,22 +234,16 @@ function assignAncestors(ancestors, centuries) {
     for (var key in ancestors) {
         var curr = ancestors[key];
         var currCentury = Math.ceil(curr.died / 100);
-        centuries[currCentury].push(curr);
+        centuries[currCentury].push(curr.died - curr.born);
     }
     return averageAge(centuries);
 }
 
-function calculateAge(array) {
-    array.map(function(object) {
-        return object.died - object.born;
-    });
-    return average(array);
-}
-
 function averageAge(centuries) {
     for (var key in centuries) {
-        return calculateAge(centuries[key]);
+        centuries[key] = average(centuries[key]);
     }
+    return centuries;
 }
 
 
