@@ -50,5 +50,11 @@ for (var i = 0; i < 5; i++) {
 }
 
 
+//I need to make a commit today lol
+
 
 //Excersize 1
+
+function deepEqual(obj) {
+    console.log('yolo');
+}
