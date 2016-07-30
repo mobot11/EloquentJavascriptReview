@@ -53,8 +53,9 @@ for (var i = 0; i < 5; i++) {
 //I need to make a commit today lol
 
 
-//Excersize 1
+//Excersize 1 I litterally just want karma
 
 function deepEqual(obj) {
     console.log('yolo');
+    console.log('swag');
 }
