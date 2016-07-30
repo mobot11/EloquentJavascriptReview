@@ -143,6 +143,7 @@ function UnderlinedCell(inner) {
     this.inner = inner;
 }
 
+
 UnderlinedCell.prototype.minWidth = function() {
     //minWidth works the same as it does for TextCell
     return this.inner.minWidth();
@@ -152,6 +153,7 @@ UnderlinedCell.prototype.minHeight = function() {
 //Add1 to account for the underline, which is just some dashes
         return this.inner.minHeight() + 1;
 };
+
 
 UnderlinedCell.prototype.draw = function(width, height) {
     //When drawing the inner cell, subtract 1 from height since the inner cell doesn't have dashes. and then add dashes
@@ -215,13 +217,41 @@ var vector2 = new Vector(30, 40);
 
 
 
-// console.log(vector.difference(vector2));
-// console.log(vector);
+console.log(vector.difference(vector2));
+console.log(vector);
 
-// Object.defineProperty(vector, "length", {
-//     get: function length() {
-//         return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
-//     }
-// });
+Object.defineProperty(vector, "length", {
+    get: function length() {
+        return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
+    }
+});
 
 console.log(vector.length);
+
+// Implement a cell type named StretchCell(inner, width, height) that conforms to the table cell interface described earlier in the chapter. It should wrap another cell (like UnderlinedCell does) and ensure that the resulting cell has at least the given width and height, even if the inner cell would naturally be smaller.
+
+function StretchedCell(inner, width, height) {
+    this.inner = inner;
+    this.width = width;
+    this.height = height;
+}
+
+StretchedCell.prototype.minWidth = function() {
+    return Math.max(this.inner.minWidth(), this.width);
+};
+
+StretchedCell.prototype.minHeight = function() {
+    return Math.max(this.inner.minHeight(), this.height);
+};
+
+StretchedCell.prototype.draw = function(width, height) {
+    return this.inner.draw(width, height);
+};
+
+var sc = new StretchedCell(new TextCell("abc"), 1, 2);
+
+// Design an interface that abstracts iteration over a collection of values. An object that provides this interface represents a sequence, and the interface must somehow make it possible for code that uses such an object to iterate over the sequence, looking at the element values it is made up of and having some way to find out when the end of the sequence is reached.
+//
+// When you have specified your interface, try to write a function logFive that takes a sequence object and calls console.log on its first five elements—or fewer, if the sequence has fewer than five elements.
+//
+// Then implement an object type ArraySeq that wraps an array and allows iteration over the array using the interface you designed. Implement another object type RangeSeq that iterates over a range of integers (taking from and to arguments to its constructor) instead.
