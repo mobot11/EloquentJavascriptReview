@@ -255,3 +255,8 @@ var sc = new StretchedCell(new TextCell("abc"), 1, 2);
 // When you have specified your interface, try to write a function logFive that takes a sequence object and calls console.log on its first five elements—or fewer, if the sequence has fewer than five elements.
 //
 // Then implement an object type ArraySeq that wraps an array and allows iteration over the array using the interface you designed. Implement another object type RangeSeq that iterates over a range of integers (taking from and to arguments to its constructor) instead.
+
+
+
+
+//
