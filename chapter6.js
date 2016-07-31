@@ -256,7 +256,9 @@ var sc = new StretchedCell(new TextCell("abc"), 1, 2);
 //
 // Then implement an object type ArraySeq that wraps an array and allows iteration over the array using the interface you designed. Implement another object type RangeSeq that iterates over a range of integers (taking from and to arguments to its constructor) instead.
 
+function interator() {
 
+}
 
 
 //
