@@ -74,6 +74,28 @@ console.log(new Date(2009, 11, 9, 12, 59, 59, 999));
 
 //month numbers start at zero, day numbers start at one, oh JavaScript you cruel cruel mistress
 
+//Timestamps are stored as the number of milliseconds since the start of 1970, using negative numbers for times before 1970 following the unix time convention which was created around that time
+
+console.log(new Date(2013, 11, 19).getTime());
+
+var timeStamp = new Date(2013, 11, 19).getTime();
+
+console.log(new Date(timeStamp));
+
+//Date objects provide getFullYear, getMonth, getDate, getHours, getMinutes, and getSeconds as well as Date.now to get a millisecond count
+
+function findDate(string) {
+    var dateTime = /(\d{1,2})-(\d{1,2})-(\d{4})/;
+    var match = dateTime.exec(string);
+    return new Date(Number(match[3]),Number(match[2]) -1, Number(match[1]));
+}
+
+console.log(findDate("30-1-2003"));
+
+//carat matches the start of the input string, while the dollar sign matches the end
+
+///^\d+$/ matches a string consisting entirely of one or more digits, /^!/ matches any string that starts with an exclamation point and /x^/ does not match any string (there cannot be an x before the start of the string)
+
 
 
 
